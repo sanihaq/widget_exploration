@@ -6,7 +6,6 @@ packages:
   - flutter/*
   - showcase/*
   - third_party/*
-  - commons/*
 
 scripts:
   analyze:

@@ -65,10 +65,10 @@ packages:
   flutter_helper_widgets:
     dependency: "direct main"
     description:
-      path: "../../commons/flutter_helper_widgets"
+      path: "../../packages/flutter_helper_widgets"
       relative: true
     source: path
-    version: "1.0.0+1"
+    version: "0.0.1+1"
   flutter_lints:
     dependency: "direct dev"
     description:
