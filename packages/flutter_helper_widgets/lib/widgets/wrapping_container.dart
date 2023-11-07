@@ -20,6 +20,7 @@ class WrappingContainer extends StatefulWidget {
 
 class _WrappingContainerState extends State<WrappingContainer> {
   Color? _color;
+  EdgeInsets? _padding;
   @override
   Widget build(BuildContext context) {
     return widget.wrap
@@ -27,13 +28,16 @@ class _WrappingContainerState extends State<WrappingContainer> {
             widget.child,
             (child, notifier) => ValueListenableBuilder(
               valueListenable: notifier,
-              builder: (context, value, _) {
+              builder: (context, value, child) {
                 if (value is Color?) _color = value;
+                if (value is EdgeInsets?) _padding = value;
                 return Container(
                   color: _color,
+                  padding: _padding,
                   child: child,
                 );
               },
+              child: child,
             ),
           )
         : widget.child;
@@ -41,10 +45,14 @@ class _WrappingContainerState extends State<WrappingContainer> {
 }
 
 class ContainerWrapper extends Wrapper {
-  const ContainerWrapper({super.notifiers});
+  const ContainerWrapper({super.key, super.notifiers});
 
   @override
   Widget wrap({required Widget child, List<ValueNotifier>? notifiers}) {
-    return WrappingContainer(notifiers: super.notifiers, child: child);
+    return WrappingContainer(
+      key: super.key,
+      notifiers: super.notifiers,
+      child: child,
+    );
   }
 }

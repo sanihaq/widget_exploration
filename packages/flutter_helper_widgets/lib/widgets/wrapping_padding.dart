@@ -29,13 +29,14 @@ class _WrappingPaddingState extends State<WrappingPadding> {
             widget.child,
             (child, notifier) => ValueListenableBuilder(
               valueListenable: notifier,
-              builder: (context, value, _) {
+              builder: (context, value, child) {
                 if (value is EdgeInsets) _padding = value;
                 return Padding(
                   padding: _padding,
                   child: child,
                 );
               },
+              child: child,
             ),
           )
         : widget.child;
@@ -43,10 +44,14 @@ class _WrappingPaddingState extends State<WrappingPadding> {
 }
 
 class PaddingWrapper extends Wrapper {
-  const PaddingWrapper({super.notifiers});
+  const PaddingWrapper({super.key, super.notifiers});
 
   @override
   Widget wrap({required Widget child, List<ValueNotifier>? notifiers}) {
-    return WrappingPadding(notifiers: super.notifiers, child: child);
+    return WrappingPadding(
+      key: super.key,
+      notifiers: super.notifiers,
+      child: child,
+    );
   }
 }

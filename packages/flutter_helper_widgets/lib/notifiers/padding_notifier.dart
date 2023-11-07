@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_helper_widgets/utils/utils.dart';
 
-class PaddingNotifier extends ValueNotifier<EdgeInsets> {
+class PaddingNotifier extends ValueNotifier<EdgeInsets?> {
   PaddingNotifier._() : super(EdgeInsets.zero);
   static final PaddingNotifier _shared = PaddingNotifier._();
   factory PaddingNotifier.singleton() => _shared;
@@ -12,6 +12,10 @@ class PaddingNotifier extends ValueNotifier<EdgeInsets> {
   double _top = 0;
   double _right = 0;
   double _bottom = 0;
+
+  setToNull() {
+    value = null;
+  }
 
   setAll(double padding) {
     _left = padding;
