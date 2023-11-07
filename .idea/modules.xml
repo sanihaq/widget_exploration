@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/flutter/bottom_navigation_bar/melos_bottom_navigation_bar.iml" filepath="$PROJECT_DIR$/flutter/bottom_navigation_bar/melos_bottom_navigation_bar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons/flutter_helper_widgets/melos_flutter_helper_widgets.iml" filepath="$PROJECT_DIR$/commons/flutter_helper_widgets/melos_flutter_helper_widgets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_widget_exploration.iml" filepath="$PROJECT_DIR$/melos_widget_exploration.iml" />
+    </modules>
+  </component>
+</project>

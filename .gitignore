@@ -1,0 +1,5 @@
+# ignore root lock file for melos
+!/pubspec.lock
+
+# overrrided for local development, not needed for deployment
+pubspec_overrides.yaml

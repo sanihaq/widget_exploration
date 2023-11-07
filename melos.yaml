@@ -1,0 +1,13 @@
+name: widget_exploration
+
+packages:
+  - packages/*
+  - packages/*/example
+  - flutter/*
+  - showcase/*
+  - third_party/*
+  - commons/*
+
+scripts:
+  analyze:
+    exec: dart analyze .
