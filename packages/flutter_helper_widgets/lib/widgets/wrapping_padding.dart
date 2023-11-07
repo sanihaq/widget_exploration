@@ -47,6 +47,6 @@ class PaddingWrapper extends Wrapper {
 
   @override
   Widget wrap({required Widget child, List<ValueNotifier>? notifiers}) {
-    return WrappingPadding(notifiers: notifiers, child: child);
+    return WrappingPadding(notifiers: super.notifiers, child: child);
   }
 }

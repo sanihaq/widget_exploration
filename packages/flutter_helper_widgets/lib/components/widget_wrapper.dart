@@ -16,7 +16,7 @@ class WidgetWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return (reverse ? wrappers.reversed : wrappers).fold(
       child,
-      (child, wrap) => wrap.wrap(child: child),
+      (child, wrapper) => wrapper.wrap(child: child),
     );
   }
 }

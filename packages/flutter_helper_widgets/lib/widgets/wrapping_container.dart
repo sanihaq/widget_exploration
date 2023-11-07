@@ -45,6 +45,6 @@ class ContainerWrapper extends Wrapper {
 
   @override
   Widget wrap({required Widget child, List<ValueNotifier>? notifiers}) {
-    return WrappingContainer(notifiers: notifiers, child: child);
+    return WrappingContainer(notifiers: super.notifiers, child: child);
   }
 }
