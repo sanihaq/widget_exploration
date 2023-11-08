@@ -25,17 +25,27 @@ class _WrappingContainerState extends State<WrappingContainer> {
   Widget build(BuildContext context) {
     return widget.wrap
         ? widget._notifiers.fold(
-            widget.child,
+            Container(
+              padding: _padding,
+              color: _color,
+              child: widget.child,
+            ),
             (child, notifier) => ValueListenableBuilder(
               valueListenable: notifier,
               builder: (context, value, child) {
-                if (value is Color?) _color = value;
-                if (value is EdgeInsets?) _padding = value;
-                return Container(
-                  color: _color,
-                  padding: _padding,
-                  child: child,
-                );
+                Future.delayed(Duration.zero).then((_) {
+                  if (value is Color?) {
+                    setState(() {
+                      _color = value;
+                    });
+                  }
+                  if (value is EdgeInsets?) {
+                    setState(() {
+                      _padding = value;
+                    });
+                  }
+                });
+                return child!;
               },
               child: child,
             ),

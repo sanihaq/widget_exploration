@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class ColorNotifier extends ValueNotifier<Color?> {
-  ColorNotifier._() : super(null);
+  ColorNotifier._([Color? color]) : super(color);
   static final ColorNotifier _shared = ColorNotifier._();
   factory ColorNotifier.singleton() => _shared;
 

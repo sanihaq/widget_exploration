@@ -33,8 +33,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  final colorNotifier = ColorNotifier();
   final paddingNotifier = PaddingNotifier();
+  final colorNotifier = ColorNotifier();
 
   @override
   Widget build(BuildContext context) {
@@ -67,18 +67,6 @@ class _HomePageState extends State<HomePage> {
                             const Text('wrapping padding:'),
                             TextButton(
                               onPressed: () {
-                                PaddingNotifier.singleton()
-                                    .randomAll(min: 19.5, max: 20);
-                              },
-                              child: const Text('change padding'),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text('wrapping padding 2:'),
-                            TextButton(
-                              onPressed: () {
                                 paddingNotifier.randomAll(min: 19.5, max: 20);
                               },
                               child: const Text('change padding'),
@@ -88,17 +76,6 @@ class _HomePageState extends State<HomePage> {
                         Row(
                           children: [
                             const Text('wrapping container:'),
-                            TextButton(
-                              onPressed: () {
-                                ColorNotifier.singleton().pickRandom();
-                              },
-                              child: const Text('change color'),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text('wrapping container 2:'),
                             TextButton(
                               onPressed: () {
                                 colorNotifier.pickRandom();
@@ -129,10 +106,13 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: WidgetWrapper(
         wrappers: [
-          ContainerWrapper(notifiers: [colorNotifier]),
           PaddingWrapper(notifiers: [paddingNotifier]),
-          const ContainerWrapper(),
-          const PaddingWrapper(),
+          // ContainerWrapper(
+          //   notifiers: [
+          //     paddingNotifier,
+          //     colorNotifier,
+          //   ],
+          // ),
         ],
         child: BottomNavigationBar(
           onTap: (int index) {
