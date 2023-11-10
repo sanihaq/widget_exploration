@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_helper_widgets/utils/utils.dart';
 
 class PaddingNotifier extends ValueNotifier<EdgeInsets?> {
-  PaddingNotifier._([EdgeInsets? padding]) : super(padding);
-  static final PaddingNotifier _shared = PaddingNotifier._();
-  factory PaddingNotifier.singleton() => _shared;
+  PaddingNotifier([EdgeInsets? padding, this.isNullable = true])
+      : super(padding);
 
-  factory PaddingNotifier() => PaddingNotifier._();
+  final bool isNullable;
 
   double _left = 0;
   double _top = 0;
   double _right = 0;
   double _bottom = 0;
 
-  setToNull() {
-    value = null;
+  /// returns a bool to indicate value is set is successful or not
+  bool setToNull() {
+    if (!isNullable) {
+      value = null;
+      return true;
+    }
+    return false;
   }
 
   setAll(double padding) {

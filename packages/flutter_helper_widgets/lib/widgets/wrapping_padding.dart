@@ -9,48 +9,47 @@ class WrappingPadding extends StatefulWidget {
     super.key,
     required this.child,
     this.wrap = true,
-    List<ValueNotifier>? notifiers,
-  }) : _notifiers = notifiers ?? [PaddingNotifier.singleton()];
+    PaddingNotifier? paddingNotifier,
+  })  : assert(paddingNotifier == null || !paddingNotifier.isNullable),
+        paddingNotifier =
+            paddingNotifier ?? PaddingNotifier(EdgeInsets.zero, false);
 
   final Widget child;
   final bool wrap;
-  final List<ValueNotifier> _notifiers;
+  final PaddingNotifier paddingNotifier;
 
   @override
   State<WrappingPadding> createState() => _WrappingPaddingState();
 }
 
 class _WrappingPaddingState extends State<WrappingPadding> {
-  EdgeInsets _padding = EdgeInsets.zero;
   @override
   Widget build(BuildContext context) {
-    return widget.wrap
-        ? widget._notifiers.fold(
-            widget.child,
-            (child, notifier) => ValueListenableBuilder(
-              valueListenable: notifier,
-              builder: (context, value, child) {
-                if (value is EdgeInsets) _padding = value;
-                return Padding(
-                  padding: _padding,
-                  child: child,
-                );
-              },
-              child: child,
-            ),
-          )
-        : widget.child;
+    return ValueListenableBuilder(
+      valueListenable: widget.paddingNotifier,
+      builder: (context, padding, child) {
+        return Padding(
+          padding: padding!,
+          child: child,
+        );
+      },
+      child: widget.child,
+    );
   }
 }
 
 class PaddingWrapper extends Wrapper {
-  const PaddingWrapper({super.key, super.notifiers});
+  const PaddingWrapper({
+    super.key,
+    this.padding,
+  });
+
+  final PaddingNotifier? padding;
 
   @override
   Widget wrap({required Widget child, List<ValueNotifier>? notifiers}) {
     return WrappingPadding(
       key: super.key,
-      notifiers: super.notifiers,
       child: child,
     );
   }

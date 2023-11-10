@@ -1,6 +1,6 @@
+import 'package:bottom_navigation_bar/components/wrap_with_container.dart';
 import 'package:bottom_navigation_bar/consts.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_helper_widgets/flutter_helper_widgets.dart';
 
 void main() {
   runApp(
@@ -18,6 +18,8 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
     );
@@ -33,8 +35,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  final paddingNotifier = PaddingNotifier();
-  final colorNotifier = ColorNotifier();
 
   @override
   Widget build(BuildContext context) {
@@ -44,46 +44,25 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     "A bare bone 'BottomNavigationBar'.\nIt simply changes current Index on 'onTap'. Then,\nbased on that makes changes to other part of tha app (BottomNavigationBar changes automatically).",
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 8.0,
                     vertical: 4.0,
                   ),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            const Text('wrapping padding:'),
-                            TextButton(
-                              onPressed: () {
-                                paddingNotifier.randomAll(min: 19.5, max: 20);
-                              },
-                              child: const Text('change padding'),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text('wrapping container:'),
-                            TextButton(
-                              onPressed: () {
-                                colorNotifier.pickRandom();
-                              },
-                              child: const Text('change color'),
-                            )
-                          ],
-                        ),
+                        WrapContainerControllerWidget(),
                       ],
                     ),
                   ),
@@ -104,16 +83,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      bottomNavigationBar: WidgetWrapper(
-        wrappers: [
-          PaddingWrapper(notifiers: [paddingNotifier]),
-          // ContainerWrapper(
-          //   notifiers: [
-          //     paddingNotifier,
-          //     colorNotifier,
-          //   ],
-          // ),
-        ],
+      bottomNavigationBar: WrapContainer(
         child: BottomNavigationBar(
           onTap: (int index) {
             setState(() {
